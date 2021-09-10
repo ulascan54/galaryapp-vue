@@ -7,13 +7,17 @@
     <div class="output">
       <div v-if="fileError" class="error">{{ fileError }}</div>
       <div v-if="file">{{ file.name }}</div>
+      <ProgressBar v-if="file" :payload="file" />
     </div>
   </form>
 </template>
 
 <script>
 import { ref } from "vue";
+import ProgressBar from "../components/ProgressBar.vue";
+
 export default {
+  components: { ProgressBar },
   setup() {
     const file = ref("");
     const fileError = ref("");
@@ -25,14 +29,15 @@ export default {
         file.value = selected;
         fileError.value = null;
       } else {
-        fileError.value = "Please Check our photo type(it must be png or jpeg !!)";
+        fileError.value =
+          "Please Check our photo type(it must be png or jpeg !!)";
         file.value = null;
       }
     };
     return {
       uploadFile,
       file,
-      fileError
+      fileError,
     };
   },
 };
@@ -64,11 +69,11 @@ label {
 label:hover {
   background: #2f3542;
 }
-.output{
+.output {
   height: 40px;
   font-size: 0.8rem;
 }
-.error{
-  color:var(--error);
+.error {
+  color: var(--error);
 }
 </style>
