@@ -1,6 +1,6 @@
 <template>
   <div class="img-grid">
-    <div v-for="img in images" :key="img.id" class="img-wrap">
+    <div v-for="img in images" :key="img.id" class="img-wrap" @click="handleClick(img.url)">
       <img :src="img.url"/>
     </div>
   </div>
@@ -9,9 +9,12 @@
 <script>
 import useFirestore from '../composables/useFirestore'
   export default {
-    setup(){
+    setup(props,context){
       const {images}=useFirestore('images')
-      return {images}
+      const handleClick=(url)=>{
+        context.emit('selected',url)
+      }
+      return {images,handleClick}
     }
   }
 </script>
