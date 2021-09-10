@@ -1,6 +1,6 @@
 <template>
   <div>
-    Resim Grid
+    Photo Grid
   </div>
 </template>
 
